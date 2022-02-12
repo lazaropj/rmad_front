@@ -33,7 +33,7 @@ export default createGlobalStyle<Props>`
   }
 
   body {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     background: black;
   }
 
