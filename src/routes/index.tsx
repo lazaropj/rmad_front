@@ -7,7 +7,7 @@ export const Routes: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/cadastro" element={<P.SignUp />} />
+        <Route path="/cadastro" element={<P.Login />} />
       </Switch>
     </BrowserRouter>
   );
