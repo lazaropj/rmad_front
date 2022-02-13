@@ -72,3 +72,5 @@ export const FormContainer = styled.section`
     }
   }
 `;
+
+export const Form = styled.form``;

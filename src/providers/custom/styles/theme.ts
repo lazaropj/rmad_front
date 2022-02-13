@@ -11,6 +11,8 @@ const theme = {
     },
     primary: '#0070f3',
     secondary: '#cbe0fd',
+    warning: '#ffb822',
+    error: '#f56565',
   },
   breakpoints: {
     desktop: '@media (min-width: 768px)',
