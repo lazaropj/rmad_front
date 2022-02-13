@@ -21,7 +21,7 @@ const AuthContext = createContext<Context>({} as Context);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User>(() => {
-    const userLocal = localStorage.getItem('@rmad:user');
+    const userLocal = localStorage.getItem('@rmad::user');
     if (userLocal) {
       return JSON.parse(userLocal);
     }
@@ -41,13 +41,13 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const SignIn = async (data: SignInParams) => {
     console.log('entrei no signin');
-    const { data: dataToken } = await api.post('/api/user/SignIn', data);
+    const { data: dataToken } = await api.post('/api/user/login', data);
 
     const bearerToken = `Bearer ${dataToken.token}`;
 
     api.defaults.headers.common.Authorization = bearerToken;
 
-    const { data: responseData } = await api.get('/api/user/SignIn');
+    const { data: responseData } = await api.get('/api/user/login');
 
     localStorage.setItem('@rmad:user', JSON.stringify(responseData[0]));
     localStorage.setItem('@rmad:token', bearerToken);
