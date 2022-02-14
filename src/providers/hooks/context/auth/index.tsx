@@ -40,20 +40,8 @@ export const AuthProvider: React.FC = ({ children }) => {
   });
 
   const SignIn = async (data: SignInParams) => {
-    console.log('entrei no signin');
-    const { data: dataToken } = await api.post('/api/user/login', data);
-
-    const bearerToken = `Bearer ${dataToken.token}`;
-
-    api.defaults.headers.common.Authorization = bearerToken;
-
-    const { data: responseData } = await api.get('/api/user/login');
-
-    localStorage.setItem('@rmad:user', JSON.stringify(responseData[0]));
-    localStorage.setItem('@rmad:token', bearerToken);
-
-    setUser(responseData[0]);
-    setToken(bearerToken);
+    console.log('entrei no signin', `dado: ####${data.email}`);
+    api.post('/api/user/login', data);
   };
 
   const value = useMemo(() => ({ user, SignIn, token }), [user, token]);
