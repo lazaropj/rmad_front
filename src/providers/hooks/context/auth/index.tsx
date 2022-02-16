@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { api } from 'src/services';
 
 export type User = {
@@ -31,8 +32,8 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const [token, setToken] = useState<string>(() => {
     const tokenLocal = localStorage.getItem('@rmad::token');
+    console.log(tokenLocal);
     if (tokenLocal) {
-      api.defaults.headers.common.Authorization = tokenLocal;
       return tokenLocal;
     }
 
@@ -40,8 +41,21 @@ export const AuthProvider: React.FC = ({ children }) => {
   });
 
   const SignIn = async (data: SignInParams) => {
-    console.log('entrei no signin', `dado: ####${data.email}`);
-    api.post('/api/user/login', data);
+    await api
+      .post('user/login', data)
+      .then(response => {
+        localStorage.setItem(
+          '@rmad::user',
+          JSON.stringify(response.data.account.email),
+        );
+        localStorage.setItem('@rmad::token', response.data.account.token);
+
+        setUser(response.data.account.email);
+        setToken(response.data.account.token);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   const value = useMemo(() => ({ user, SignIn, token }), [user, token]);

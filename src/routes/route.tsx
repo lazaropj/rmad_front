@@ -1,21 +1,15 @@
 import React, { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAuth, useModal } from 'src/providers/hooks/context';
+import { useAuth } from 'src/providers/hooks/context';
 
 export const PrivateRoute: React.FC = () => {
-  const { user } = useAuth();
-  const { toggleModal } = useModal();
+  const { token } = useAuth();
 
   useEffect(() => {
-    if (!user?.email) {
+    if (token) {
       console.log('entrouaqui');
-      toggleModal({
-        signIn: {
-          isOpen: true,
-        },
-      });
     }
-  }, [user, toggleModal]);
+  }, [token]);
 
-  return user.email ? <Outlet /> : <Navigate to="/" />;
+  return token ? <Outlet /> : <Navigate to="/" />;
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { Button, Col, Container, FormGroup, Label, Row } from 'reactstrap';
 import { Input } from 'src/components';
 import { useAuth } from 'src/providers/hooks/context/auth';
@@ -15,6 +16,7 @@ type Form = {
 
 export const SignInPage: React.FC = () => {
   const { SignIn } = useAuth();
+  const navigate = useNavigate();
 
   const methods = useForm<Form>();
   const { handleSubmit: ProviderSubmit } = methods;
@@ -25,9 +27,13 @@ export const SignInPage: React.FC = () => {
         email,
         password,
       });
+
+      const tokenLocal = localStorage.getItem('@rmad::token');
+      if (tokenLocal) {
+        navigate('/area-logada');
+      }
     } catch (error) {
       console.error(error);
-      // alert('Error');
     }
   };
   return (
