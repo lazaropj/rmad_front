@@ -7,7 +7,9 @@ export const PrivateRoute: React.FC = () => {
 
   useEffect(() => {
     if (token) {
-      console.log('entrouaqui');
+      console.log('Private route - token', token);
+    } else {
+      console.log('Private route - não tenho token');
     }
   }, [token]);
 

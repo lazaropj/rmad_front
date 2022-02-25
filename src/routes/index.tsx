@@ -14,11 +14,11 @@ export const Routes: React.FC = () => {
     <BrowserRouter>
       <Switch>
         <Route path="/" element={<P.Home />} />
-        <Route path="/cadastro" element={<P.SignInPage />} />
+        <Route path="/login" element={<P.SignInPage />} />
 
         <Route path="/" element={<Outlet />}>
           <Route path="/" element={<PrivateRoute />}>
-            <Route path="area-logada" element={<P.AreaLogada />} />
+            <Route path="travels" element={<P.MyTravels />} />
           </Route>
         </Route>
       </Switch>
