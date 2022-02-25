@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Col, Container, FormGroup, Label, Row } from 'reactstrap';
 import { Input } from 'src/components';
 import { useAuth } from 'src/providers/hooks/context/auth';
-import { api } from 'src/services';
 import { emailRegExp } from 'src/validators/email';
 
 import * as S from './styles';
@@ -30,7 +29,7 @@ export const SignInPage: React.FC = () => {
 
       const tokenLocal = localStorage.getItem('@rmad::token');
       if (tokenLocal) {
-        navigate('/area-logada');
+        navigate('/travels');
       }
     } catch (error) {
       console.error(error);

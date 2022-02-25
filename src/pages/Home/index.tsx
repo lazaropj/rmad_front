@@ -1,5 +1,9 @@
 import React from 'react';
 
 export const Home: React.FC = () => {
-  return <h1>Home</h1>;
+  return (
+    <div>
+      <h1>home</h1>
+    </div>
+  );
 };
