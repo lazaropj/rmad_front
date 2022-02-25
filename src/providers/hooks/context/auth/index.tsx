@@ -26,15 +26,14 @@ export const AuthProvider: React.FC = ({ children }) => {
     if (userLocal) {
       return JSON.parse(userLocal);
     }
-
     return {} as User;
   });
 
   const [token, setToken] = useState<string>(() => {
     const tokenLocal = localStorage.getItem('@rmad::token');
-    console.log(tokenLocal);
+
     if (tokenLocal) {
-      return tokenLocal;
+      return `${tokenLocal}`;
     }
 
     return '';
@@ -42,16 +41,20 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const SignIn = async (data: SignInParams) => {
     await api
-      .post('user/login', data)
+      .post('/user/login', data)
       .then(response => {
         localStorage.setItem(
           '@rmad::user',
           JSON.stringify(response.data.account.email),
         );
-        localStorage.setItem('@rmad::token', response.data.account.token);
 
+        const { email } = response.data.account.email;
+        if (email !== undefined) {
+          console.log('email', email);
+        }
+        localStorage.setItem('@rmad::token', response.data.account.token);
         setUser(response.data.account.email);
-        setToken(response.data.account.token);
+        setToken(`Bearer ${response.data.account.token}`);
       })
       .catch(error => {
         console.log(error);
