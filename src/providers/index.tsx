@@ -3,7 +3,6 @@ import React from 'react';
 import { ThemeProvider } from './custom';
 
 import { MobileProvider, ModalProvider, AuthProvider } from './hooks/context';
-import { TravelProvider } from './hooks/context/travels';
 
 export const RootProvider: React.FC = ({ children }) => {
   const providers = [
@@ -11,7 +10,6 @@ export const RootProvider: React.FC = ({ children }) => {
     ThemeProvider,
     ModalProvider,
     AuthProvider,
-    TravelProvider,
   ];
   return (
     <>
