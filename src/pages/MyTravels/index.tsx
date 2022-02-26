@@ -18,6 +18,10 @@ export type Travel = {
 
 export const MyTravels: React.FC = () => {
   const [travels, setTravels] = useState<Travel[]>([]);
+  const [trajectory, setTrajectory] = useState(0);
+  const changeTrajectory = (value: number) => {
+    setTrajectory(value);
+  }
   useEffect(() => {
     const chamarFuncao = async () => {
       const tokenLocal = localStorage.getItem('@rmad::token');
@@ -34,6 +38,7 @@ export const MyTravels: React.FC = () => {
       }
     };
     chamarFuncao();
+    changeTrajectory(50)
   }, []);
 
   return (
@@ -46,17 +51,17 @@ export const MyTravels: React.FC = () => {
                 <span>{item.title}</span>
               </S.ButtonAction>
               <S.Intinerary>
-                <S.In>
+                <S.Date>
                   <span>10h35</span>
                   <span>Partida</span>
-                </S.In>
-                <S.Level>
+                </S.Date>
+                <S.Level trajectory={trajectory}>
                   <div />
                 </S.Level>
-                <S.In>
+                <S.Date>
                   <span>11h05</span>
                   <span>Partida</span>
-                </S.In>
+                </S.Date>
               </S.Intinerary>
               <S.Flag>
                 <span>Code: B4QdwxjMlp</span>

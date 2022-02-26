@@ -98,12 +98,14 @@ export const CardBody = styled.div`
 export const Intinerary = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
+
   position: absolute;
   bottom: 34px;
   left: 27%;
 `;
 
-export const In = styled.div`
+export const Date = styled.div`
   display: flex;
   flex-direction: column;
   width: 50px;
@@ -119,21 +121,29 @@ export const In = styled.div`
   }
   span:last-child {
     font-weight: 600;
-    font-size: 10px;
+    font-size: 0.8rem;
     line-height: 21px;
-    /* identical to box height, or 210% */
-
-    /* Blue 2 */
 
     color: #2d9cdb;
   }
 `;
 
-export const Level = styled.div`
+interface LevelProps {
+  trajectory: number;
+}
+
+export const Level = styled.div<LevelProps>`
   display: flex;
-  width: 77px;
+  width: 71px;
   background: red;
-  height: 30px;
+  height: 3px;
+
+  margin: 0 25px 0 15px;
+
+  div {
+    width: ${(props) => props.trajectory}%;
+    background: #2d9cdb;
+  }
 `;
 
 export const CardFooter = styled.footer`
