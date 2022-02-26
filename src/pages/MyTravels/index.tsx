@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTravel } from 'src/providers/hooks/context/travels';
 import * as S from './styles';
 
 export const MyTravels: React.FC = () => {
+  const [trajectory, setTrajectory] = useState(0);
   const { travels } = useTravel();
 
-  console.log('Page my travels', travels);
+  const changeTrajectory = (value: number) => {
+    setTrajectory(value);
+  }
+
+  useEffect(() => {
+    changeTrajectory(50)
+  }, [trajectory]);
 
   return (
     <div>
@@ -15,17 +22,17 @@ export const MyTravels: React.FC = () => {
             <span>Btn</span>
           </S.ButtonAction>
           <S.Intinerary>
-            <S.In>
+            <S.Date>
               <span>10h35</span>
               <span>Partida</span>
-            </S.In>
-            <S.Level>
+            </S.Date>
+            <S.Level trajectory={trajectory}>
               <div />
             </S.Level>
-            <S.In>
+            <S.Date>
               <span>11h05</span>
               <span>Partida</span>
-            </S.In>
+            </S.Date>
           </S.Intinerary>
           <S.Flag>
             <span>Code: B4QdwxjMlp</span>
