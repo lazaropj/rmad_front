@@ -1,5 +1,6 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL:
+    'https://cors-anywhere.herokuapp.com/https://rmad-api.herokuapp.com/api',
 });
