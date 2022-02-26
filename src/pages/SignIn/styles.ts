@@ -40,6 +40,7 @@ export const Main = styled.main`
 
   flex-wrap: wrap;
   width: 312px;
+  height: 210px;
 
   a {
     font-weight: 500;
@@ -58,6 +59,8 @@ export const FormContainer = styled.section`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  justify-content: flex-start;
+  height: inherit;
 
   label {
     display: none;
@@ -66,6 +69,19 @@ export const FormContainer = styled.section`
   form {
     width: 312px;
     height: 150px;
+
+    input {
+      border-radius: 34px;
+      border: 1px solid ${({ theme }) => theme.colors.gray[100]};
+      padding: 0 25px;
+      font-size: 1rem;
+
+      &::placeholder,
+      &:focus {
+        color: red;
+        font-size: 1rem;
+      }
+    }
 
     button {
       width: 100%;
