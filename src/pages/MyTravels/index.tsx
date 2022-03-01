@@ -21,25 +21,19 @@ export const MyTravels: React.FC = () => {
   const [travels, setTravels] = useState<Travel[]>([]);
   const [trajectory, setTrajectory] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
-  const [sucess, setSucess] = useState(false);
-  const [vote, SetVote] = useState<Number>(0);
+  const [vote, setVote] = useState<Number>(0);
 
   const changeTrajectory = (value: number) => {
     setTrajectory(value);
   }
-  const dateTransform = (date: string) => {
-    const [year, month, day] = date.split('-');
-    return `${day}/${month}/${year}`;
-  }
   
   const addVote = (value:number) => {
-    SetVote(value);
+    setVote(value);
   }
 
   const sendVote = async (code: any) => {
     setIsOpen(!isOpen); 
     if (isOpen) {
-      console.log('Dados que vieram do inputs',code);
       const config = {
         vote: vote,
         code: code,
@@ -49,16 +43,16 @@ export const MyTravels: React.FC = () => {
         alert('Você não avaliou o trajeto');
         return;
       }else {
+        const tokenLocal = localStorage.getItem('@rmad::token');
         try {
           await api.post('/travel/vote', config, {
             method: 'post',
             headers: { 
-              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOjF9.wcUaspFuy-U4rN3cQ8KerFARodeYvhbq_kBBEO6foHM', 
+              'Authorization': `Bearer ${tokenLocal}`,
               'Content-Type': 'application/json'
             },
           }).then((response) => {
             if(response.status === 200) {
-              setSucess(true)
               alert('Voto adicionado com sucesso');
             }
           });
@@ -70,7 +64,7 @@ export const MyTravels: React.FC = () => {
   }
 
   useEffect(() => {
-    SetVote(vote)
+    setVote(vote)
     console.log('addVote', vote);
   }, [vote]);
 
