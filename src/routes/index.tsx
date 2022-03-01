@@ -6,19 +6,20 @@ import {
   Outlet,
 } from 'react-router-dom';
 
-import * as P from 'src/pages';
+import * as Page from 'src/pages';
 import { PrivateRoute } from './route';
 
 export const Routes: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" element={<P.Home />} />
-        <Route path="/login" element={<P.SignInPage />} />
+        <Route path="/" element={<Page.Home />} />
+        <Route path="/login" element={<Page.SignInPage />} />
 
         <Route path="/" element={<Outlet />}>
           <Route path="/" element={<PrivateRoute />}>
-            <Route path="travels" element={<P.MyTravels />} />
+            <Route path="travels" element={<Page.MyTravels />} />
+            <Route path="new-travel" element={<Page.CreateTravel />} />
           </Route>
         </Route>
       </Switch>

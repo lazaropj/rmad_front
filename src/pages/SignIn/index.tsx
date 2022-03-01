@@ -57,6 +57,7 @@ export const SignInPage: React.FC = () => {
                     <FormGroup>
                       <Label for="exampleEmail">Email</Label>
                       <Input
+                        className="form-control"
                         id="exampleEmail"
                         name="email"
                         placeholder="Login"
@@ -74,6 +75,7 @@ export const SignInPage: React.FC = () => {
                     <FormGroup>
                       <Label for="examplePassword">Password</Label>
                       <Input
+                        className="form-control"
                         id="examplePassword"
                         name="password"
                         placeholder="Senha"

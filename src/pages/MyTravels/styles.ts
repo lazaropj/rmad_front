@@ -13,17 +13,35 @@ export const CardHeader = styled.header`
   background: #bdbdbd;
   border-radius: 132px 26px 0px 0px;
   position: relative;
+
+  .collapse {
+    position: absolute;
+    top: 75px;
+    left: 27px;
+  }
 `;
 
 export const ButtonAction = styled.div`
   display: flex;
-  width: 85px;
-  height: 85px;
   background: #14a0cc;
   border-radius: 42px;
 
+  width: 150px;
+  height: 50px;
+  border-radius: 30px;
+
+  position: absolute;
+  right: 25px;
+  top: 25px;
+
   align-items: center;
   justify-content: center;
+
+  .btn {
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+  }
 `;
 
 export const Flag = styled.div`
@@ -98,12 +116,14 @@ export const CardBody = styled.div`
 export const Intinerary = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
+
   position: absolute;
   bottom: 34px;
   left: 27%;
 `;
 
-export const In = styled.div`
+export const Date = styled.div`
   display: flex;
   flex-direction: column;
   width: 50px;
@@ -119,21 +139,29 @@ export const In = styled.div`
   }
   span:last-child {
     font-weight: 600;
-    font-size: 10px;
+    font-size: 0.8rem;
     line-height: 21px;
-    /* identical to box height, or 210% */
-
-    /* Blue 2 */
 
     color: #2d9cdb;
   }
 `;
 
-export const Level = styled.div`
+interface LevelProps {
+  trajectory: number;
+}
+
+export const Level = styled.div<LevelProps>`
   display: flex;
-  width: 77px;
+  width: 71px;
   background: red;
-  height: 30px;
+  height: 3px;
+
+  margin: 0 25px 0 15px;
+
+  div {
+    width: ${(props) => props.trajectory}%;
+    background: #2d9cdb;
+  }
 `;
 
 export const CardFooter = styled.footer`
