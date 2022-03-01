@@ -29,11 +29,13 @@ export const CreateTravel: React.FC = () => {
       start_date: '2020-01-10T12:42:31Z',
     }
 
+    const tokenLocal = localStorage.getItem('@rmad::token');
+
     try {
       await api.post('/travel', config, {
         method: 'post',
         headers: { 
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOjF9.wcUaspFuy-U4rN3cQ8KerFARodeYvhbq_kBBEO6foHM', 
+          'Authorization': `Bearer ${tokenLocal}`,
           'Content-Type': 'application/json'
         },
       }).then((response) => {
