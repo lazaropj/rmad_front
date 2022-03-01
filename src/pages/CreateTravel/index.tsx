@@ -19,14 +19,7 @@ export const CreateTravel: React.FC = () => {
   const methods = useForm<TravelParams>();
   const navigate = useNavigate();
   const [sucess, setSucess] = useState(false);
-  const [hashCode, setHashCode] = useState(() => {
-      const hash = '_' + Math.random().toString(36).substr(2, 9);
-      return hash;
-  });
   const { handleSubmit: ProviderSubmit } = methods;
-
-  console.log(hashCode, 'hashCode');
-
 
   const handleSubmit: SubmitHandler<TravelParams> = async ( {title, description, route, start_date,  finish_date, code}, event) => {
 
@@ -36,8 +29,6 @@ export const CreateTravel: React.FC = () => {
       description: description,
       route: route,
       start_date: '2020-01-10T12:42:31Z',
-      finish_date: '2020-01-10T12:42:31Z',
-      code: hashCode,
     }
 
     const tokenLocal = localStorage.getItem('@rmad::token');
