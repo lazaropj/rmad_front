@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ChangeEventHandler } from 'react';
+import React, { ChangeEvent } from 'react';
 import merge from 'lodash.merge';
 import {
   useController,
@@ -10,7 +10,7 @@ import masker from 'vanilla-masker';
 import { Error } from 'src/assets/images/svg/error';
 import { Warn } from 'src/assets/images/svg/warn';
 
-import * as S from './styles';
+import * as Style from './styles';
 
 type Controller = Omit<UseControllerProps, 'name' | 'control'>;
 interface Props
@@ -64,7 +64,7 @@ export const Input: React.FC<Props> = ({ name, controller, mask, ...rest }) => {
   };
 
   return (
-    <S.Container
+    <Style.Container
       error={!!fieldState.error?.message}
       warning={fieldState.error?.type === 'required'}
     >
@@ -90,6 +90,6 @@ export const Input: React.FC<Props> = ({ name, controller, mask, ...rest }) => {
             <Error color="red" />
           </div>
         ))}
-    </S.Container>
+    </Style.Container>
   );
 };

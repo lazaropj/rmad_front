@@ -13,17 +13,35 @@ export const CardHeader = styled.header`
   background: #bdbdbd;
   border-radius: 132px 26px 0px 0px;
   position: relative;
+
+  .collapse {
+    position: absolute;
+    top: 75px;
+    left: 27px;
+  }
 `;
 
 export const ButtonAction = styled.div`
   display: flex;
-  width: 85px;
-  height: 85px;
   background: #14a0cc;
   border-radius: 42px;
 
+  width: 150px;
+  height: 50px;
+  border-radius: 30px;
+
+  position: absolute;
+  right: 25px;
+  top: 25px;
+
   align-items: center;
   justify-content: center;
+
+  .btn {
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+  }
 `;
 
 export const Flag = styled.div`
