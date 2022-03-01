@@ -52,7 +52,7 @@ export const MyTravels: React.FC = () => {
               'Content-Type': 'application/json'
             },
           }).then((response) => {
-            if(response.status === 200) {
+            if(response.status === 200 && response.data.status === 'success') {
               alert('Voto adicionado com sucesso');
             }
           });
@@ -60,6 +60,7 @@ export const MyTravels: React.FC = () => {
           console.error('Erro CreateTravel', error);
         }
       }
+      setVote(0);
     }
   }
 
@@ -136,7 +137,7 @@ export const MyTravels: React.FC = () => {
                 </Style.Date>
               </Style.Intinerary>
               <Style.Flag>
-                <span>Code: {item.code === '' && 'indisponível'}</span>
+                <span>Code: {item.code ? item.code : 'indisponível'}</span>
               </Style.Flag>
             </Style.CardHeader>
             <Style.CardBody>
