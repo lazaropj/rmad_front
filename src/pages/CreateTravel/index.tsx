@@ -28,7 +28,7 @@ export const CreateTravel: React.FC = () => {
       title: title,
       description: description,
       route: route,
-      start_date: '2020-01-10T12:42:31Z',
+      start_date: start_date,
     }
 
     const tokenLocal = localStorage.getItem('@rmad::token');
