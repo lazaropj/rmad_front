@@ -78,6 +78,14 @@ export const MyTravels: React.FC = () => {
           headers: { 'Authorization': `Bearer ${tokenLocal}` },
         }).then((response) => {
           const myTravels = response.data.data.map((item: Travel) => item);
+          myTravels.sort((a: any, b: any) => {
+            console.log('a', a.start_date)
+            console.log('b', b.start_date)
+            a = new Date(a.start_date);
+            b = new Date(b.start_date);
+            return a > b ? -1 : a < b ? 1 : 0;
+          });
+
           console.log("myTravels", myTravels);
           setTravels([...myTravels]);
         });
