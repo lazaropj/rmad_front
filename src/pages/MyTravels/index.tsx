@@ -3,6 +3,7 @@ import { Button, ButtonGroup, Card, CardBody, Collapse } from 'reactstrap';
 import { dateFormat } from 'src/utils/dateFormat';
 import { api } from 'src/services';
 import * as Style from './styles';
+import moment from 'moment';
 
 export type Travel = {
   id?: number;
@@ -79,11 +80,10 @@ export const MyTravels: React.FC = () => {
         }).then((response) => {
           const myTravels = response.data.data.map((item: Travel) => item);
           myTravels.sort((a: any, b: any) => {
-            console.log('a', a.start_date)
-            console.log('b', b.start_date)
             a = new Date(a.start_date);
             b = new Date(b.start_date);
-            return a > b ? -1 : a < b ? 1 : 0;
+            console.log(a, '######', b)
+            return b - a;
           });
 
           console.log("myTravels", myTravels);

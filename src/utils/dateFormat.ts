@@ -7,13 +7,10 @@ type dateFormat = {
 
 export const dateFormat = (date: string | null): string=> {
   const dateHour = (dateFormat: string) => {
-    const dateNow = moment().format('YYYY-MM-DD HH:mm:ss');
-    const dateFuture = moment(dateFormat).format('YYYY-MM-DD HH:mm:ss');
-    const dateNowMoment = moment(dateNow);
-    const dateFutureMoment = moment(dateFuture);
-    const diff = dateNowMoment.diff(dateFutureMoment);
-  
-    if (diff < 0) {
+    const dateNow = moment().format('YYYY-MM-DD');
+    const date = moment(dateFormat).format('YYYY-MM-DD');
+
+    if (date == dateNow) {
       return moment(dateFormat).locale('pt-br').format('HH:mm');
     } else {
       return moment(dateFormat).format('DD.MM.YYYY HH:mm');
