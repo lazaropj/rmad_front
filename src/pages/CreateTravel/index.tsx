@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useState } from 'react';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -11,24 +12,27 @@ type TravelParams = {
   description: string;
   route: string;
   start_date: string;
+  finish_date?: string;
+  code?: string;
+  hour?: string;
 };
 
 export const CreateTravel: React.FC = () => {
   const methods = useForm<TravelParams>();
   const navigate = useNavigate();
-  const [sucess, setSucess] = useState(false);
   const { handleSubmit: ProviderSubmit } = methods;
 
-  const handleSubmit: SubmitHandler<TravelParams> = async ( {title, description, route, start_date}, event) => {
+  const handleSubmit: SubmitHandler<TravelParams> = async ( {title, description, route, start_date,  finish_date, code, hour}, event) => {
 
-    console.log('Dados que vieram do inputs',title, description, route, start_date);
+    console.log('Dados que vieram do inputs', start_date);
+
     const config: TravelParams = {
       title: title,
       description: description,
       route: route,
-      start_date: '2020-01-10T12:42:31Z',
+      start_date: String(moment(start_date).format('YYYY-MM-DDTHH:mm:ssZ')),
     }
-
+    console.log('Dados que vieram do inputs', config.start_date);
     const tokenLocal = localStorage.getItem('@rmad::token');
 
     try {
@@ -40,7 +44,6 @@ export const CreateTravel: React.FC = () => {
         },
       }).then((response) => {
         if(response.status === 200) {
-          setSucess(true)
           alert('Criado com sucesso');
           navigate('/travels');
         }
@@ -96,7 +99,7 @@ export const CreateTravel: React.FC = () => {
                 id="start_date"
                 name="start_date"
                 placeholder="informe quando"
-                type="date"
+                type="datetime-local"
               />
             </FormGroup>
             <Button type="submit">entrar</Button>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup, Card, CardBody, Collapse } from 'reactstrap';
+import { dateFormat } from 'src/utils/dateFormat';
 import { api } from 'src/services';
 import * as Style from './styles';
 
@@ -11,9 +12,9 @@ export type Travel = {
   title: string;
   description?: string;
   route?: string;
-  start_date?: string;
-  finish_date?: string;
-  code?: string;
+  start_date: string;
+  finish_date: string | null;
+  code: string;
   user_id?: number;
 };
 
@@ -31,7 +32,7 @@ export const MyTravels: React.FC = () => {
     setVote(value);
   }
 
-  const sendVote = async (code: any) => {
+  const sendVote = async (code: string) => {
     setIsOpen(!isOpen); 
     if (isOpen) {
       const config = {
@@ -52,7 +53,7 @@ export const MyTravels: React.FC = () => {
               'Content-Type': 'application/json'
             },
           }).then((response) => {
-            if(response.status === 200) {
+            if(response.status === 200 && response.data.status === 'success') {
               alert('Voto adicionado com sucesso');
             }
           });
@@ -60,6 +61,7 @@ export const MyTravels: React.FC = () => {
           console.error('Erro CreateTravel', error);
         }
       }
+      setVote(0);
     }
   }
 
@@ -76,6 +78,14 @@ export const MyTravels: React.FC = () => {
           headers: { 'Authorization': `Bearer ${tokenLocal}` },
         }).then((response) => {
           const myTravels = response.data.data.map((item: Travel) => item);
+          myTravels.sort((a: any, b: any) => {
+            console.log('a', a.start_date)
+            console.log('b', b.start_date)
+            a = new Date(a.start_date);
+            b = new Date(b.start_date);
+            return a > b ? -1 : a < b ? 1 : 0;
+          });
+
           console.log("myTravels", myTravels);
           setTravels([...myTravels]);
         });
@@ -124,19 +134,19 @@ export const MyTravels: React.FC = () => {
               </Collapse>
               <Style.Intinerary>
                 <Style.Date>
-                  <span>10h35</span>
+                  <span>{dateFormat(item.start_date)}</span>
                   <span>Partida</span>
                 </Style.Date>
                 <Style.Level trajectory={trajectory}>
                   <div />
                 </Style.Level>
                 <Style.Date>
-                  <span>11h05</span>
+                  <span>{dateFormat(item.finish_date)}</span>
                   <span>Chegada</span>
                 </Style.Date>
               </Style.Intinerary>
               <Style.Flag>
-                <span>Code: {item.code === '' && 'indisponível'}</span>
+                <span>Code: {item.code ? item.code : 'indisponível'}</span>
               </Style.Flag>
             </Style.CardHeader>
             <Style.CardBody>
