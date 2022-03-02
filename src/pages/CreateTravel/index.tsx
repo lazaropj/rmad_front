@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useState } from 'react';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +19,6 @@ type TravelParams = {
 export const CreateTravel: React.FC = () => {
   const methods = useForm<TravelParams>();
   const navigate = useNavigate();
-  const [sucess, setSucess] = useState(false);
   const { handleSubmit: ProviderSubmit } = methods;
 
   const handleSubmit: SubmitHandler<TravelParams> = async ( {title, description, route, start_date,  finish_date, code}, event) => {
@@ -28,7 +28,7 @@ export const CreateTravel: React.FC = () => {
       title: title,
       description: description,
       route: route,
-      start_date: start_date,
+      start_date: String(moment(start_date).format('YYYY-MM-DDTHH:mm:ssZ')),
     }
 
     const tokenLocal = localStorage.getItem('@rmad::token');
@@ -42,7 +42,6 @@ export const CreateTravel: React.FC = () => {
         },
       }).then((response) => {
         if(response.status === 200) {
-          setSucess(true)
           alert('Criado com sucesso');
           navigate('/travels');
         }
