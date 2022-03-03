@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup, Card, CardBody, Collapse } from 'reactstrap';
 import { dateFormat } from 'src/utils/dateFormat';
 import { api } from 'src/services';
+import star from 'src/assets/images/svg/star.svg';
+
 import * as Style from './styles';
-import moment from 'moment';
 
 export type Travel = {
   id?: number;
@@ -82,7 +83,6 @@ export const MyTravels: React.FC = () => {
           myTravels.sort((a: any, b: any) => {
             a = new Date(a.start_date);
             b = new Date(b.start_date);
-            console.log(a, '######', b)
             return b - a;
           });
 
@@ -105,7 +105,6 @@ export const MyTravels: React.FC = () => {
             <Style.CardHeader>
               <Style.ButtonAction>
                 <Button
-                  color="primary"
                   onClick={() => sendVote(item.code)}
                 >
                   {isOpen ? 'Enviar' : 'Avaliar'}
@@ -132,33 +131,34 @@ export const MyTravels: React.FC = () => {
                   </CardBody>
                 </Card>
               </Collapse>
-              <Style.Intinerary>
-                <Style.Date>
-                  <span>{dateFormat(item.start_date)}</span>
-                  <span>Partida</span>
-                </Style.Date>
-                <Style.Level trajectory={trajectory}>
-                  <div />
-                </Style.Level>
-                <Style.Date>
-                  <span>{dateFormat(item.finish_date)}</span>
-                  <span>Chegada</span>
-                </Style.Date>
-              </Style.Intinerary>
               <Style.Flag>
                 <span>Code: {item.code ? item.code : 'indisponível'}</span>
               </Style.Flag>
             </Style.CardHeader>
             <Style.CardBody>
               <span>Rota: {item.route}</span>
+              <Style.Intinerary>
+                  <Style.Date>
+                    <span>{dateFormat(item.start_date)}</span>
+                    <span>Partida</span>
+                  </Style.Date>
+                  <Style.Level trajectory={trajectory}>
+                    <div />
+                  </Style.Level>
+                  <Style.Date>
+                    <span>{dateFormat(item.finish_date)}</span>
+                    <span>Chegada</span>
+                  </Style.Date>
+                </Style.Intinerary>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
             </Style.CardBody>
             <Style.CardFooter>
               <Style.Avatar>
                 <img src="https://via.placeholder.com/17x17" alt="Avatar" />
+                <span>Name {item.code}</span>
               </Style.Avatar>
-              <span>Name {item.code}</span>
+              <Style.Details>Detalhar</Style.Details>
             </Style.CardFooter>
           </Style.Container>
         ))

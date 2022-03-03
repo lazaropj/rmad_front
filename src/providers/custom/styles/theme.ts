@@ -1,16 +1,16 @@
 const theme = {
   colors: {
     black: {
-      100: '#fafafa',
+      100: '#242a37',
     },
     white: {
       base: '#ffffff',
     },
     gray: {
-      100: '#f7fafc',
+      100: '#f1f2f6',
     },
-    primary: '#0070f3',
-    secondary: '#cbe0fd',
+    primary: '#ffd428',
+    secondary: '#ff8900',
     warning: '#ffb822',
     error: '#f56565',
   },
@@ -20,6 +20,7 @@ const theme = {
     desktopLarge: '@media (min-width: 1280px)',
   },
   background: {
+    baseTransparent: '#ffffff9e',
     color: {
       gray100: '#F2F2F2',
       gray200: '#C4C4C4;',
