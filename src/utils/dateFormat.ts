@@ -20,5 +20,5 @@ export const dateFormat = (date: string | null): string=> {
   if(date){
     return dateHour(date);
   }
-  return 'data indefinida';
+  return 'indefinida';
 };

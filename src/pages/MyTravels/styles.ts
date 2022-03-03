@@ -2,17 +2,47 @@ import styled from 'styled-components';
 
 export const Container = styled.section`
   max-width: 423px;
+  height: 500px;
+
+  border: 1px solid ${({theme}) => theme.colors.gray[100]};
   filter: drop-shadow(0px 3px 16px rgba(0, 0, 0, 0.25));
-  border-radius: 0px 0px 15px 15px;
   overflow: hidden;
+
   padding-bottom: 25px;
+  margin: 25px 0;
+
+  border-radius: 30px;
+  z-index: -1;
+
+  &::before {
+    overflow: hidden;
+    content: '';
+    height: 500px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: ${({ theme }) => theme.colors.white.base};
+    background-image: url('https://images.unsplash.com/photo-1581922819941-6ab31ab79afc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+  }
 `;
 
 export const CardHeader = styled.header`
-  height: 319px;
-  background: #bdbdbd;
-  border-radius: 132px 26px 0px 0px;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  height: 235px;
+
+  padding: 30px 28px 0 28px;
+  overflow: hidden;
+  z-index: 0;
 
   .collapse {
     position: absolute;
@@ -23,24 +53,24 @@ export const CardHeader = styled.header`
 
 export const ButtonAction = styled.div`
   display: flex;
-  background: #14a0cc;
-  border-radius: 42px;
-
-  width: 150px;
-  height: 50px;
-  border-radius: 30px;
-
-  position: absolute;
-  right: 25px;
-  top: 25px;
-
   align-items: center;
   justify-content: center;
+
+  width: 92px;
+  height: fit-content;
+  border-radius: 50px;
 
   .btn {
     width: inherit;
     height: inherit;
     border-radius: inherit;
+
+    font-size: 0.8rem;
+    font-weight: 600;
+
+    background-color: ${({theme}) => theme.colors.primary};
+    color: ${({theme}) => theme.colors.black[100]};
+    border: 1px solid ${({theme}) => theme.colors.primary};
   }
 `;
 
@@ -48,85 +78,94 @@ export const Flag = styled.div`
   display: flex;
   justify-content: center;
 
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  width: 140px;
+  height: 25px;
 
-  width: 116px;
-  height: 14px;
-
-  /* Blue 2 */
-
-  background: #2d9cdb;
-  border-radius: 27px 0px 0px 0px;
+  background: ${({theme}) => theme.colors.secondary};
+  border-radius: 27px 8px 0px 0px;
 
   span {
+    display: contents;
     font-weight: normal;
-    font-size: 0.6rem;
-    /* identical to box height, or 240% */
+    font-size: 0.7rem;
 
-    /* Gray 6 */
-
-    color: #f2f2f2;
+    color: ${({theme}) => theme.colors.white.base};
 
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 `;
 
 export const CardBody = styled.div`
-  padding: 13px 36px;
-  background: #fff;
+  padding: 13px 18px;
+  margin: 0 28px;
+  z-index: 0;
+
+  border-radius: 12px 0 0 0;
+  background: ${({theme}) => theme.colors.white.base};
 
   span {
     font-style: normal;
-    font-weight: bold;
-    font-size: 1rem;
+    font-size: 0.8rem;
     line-height: 2.1rem;
 
-    color: #2d9cdb;
+    color: ${({theme}) => theme.colors.black[100]};
   }
 
   h3 {
     font-style: normal;
     font-weight: bold;
-    font-size: 1.4rem;
-    line-height: 1.7rem;
-    /* or 121% */
+    font-size: 0.8rem;
+    line-height: 1rem;
 
-    /* Gray 1 */
+    margin-bottom: 6px;
+    color: ${({theme}) => theme.colors.black[100]};
 
-    color: #333333;
+    &:first-letter {
+      text-transform: capitalize;
+    }
   }
 
   p {
     font-style: normal;
     font-weight: normal;
-    font-size: 1.3rem;
-    line-height: 1.7rem;
-    /* or 131% */
-
-    /* Gray 3 */
+    font-size: 0.8rem;
+    line-height: 1rem;
 
     color: #828282;
 
     margin-bottom: 0;
+
+    &:first-letter {
+      text-transform: capitalize;
+    }
   }
 `;
 
 export const Intinerary = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 
-  position: absolute;
-  bottom: 34px;
-  left: 27%;
+  padding: 12px;
+  margin-bottom: 18px;
+
+  background: ${({theme}) => theme.colors.primary};
+  border-radius: 12px;
+  border: 1px solid #ffd015;
+
+  box-shadow: inset 0 0 15px #eab112;
+
+  div:last-child {
+    span {
+      text-align: right;
+    }
+  }
 `;
 
 export const Date = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50px;
+  width: 120px;
 
   span:first-child {
     font-style: normal;
@@ -138,11 +177,11 @@ export const Date = styled.div`
     color: #000000;
   }
   span:last-child {
-    font-weight: 600;
+    font-weight: normal;
     font-size: 0.8rem;
     line-height: 21px;
 
-    color: #2d9cdb;
+    color: ${({theme}) => theme.colors.black[100]};
   }
 `;
 
@@ -153,35 +192,33 @@ interface LevelProps {
 export const Level = styled.div<LevelProps>`
   display: flex;
   width: 71px;
-  background: red;
+  background: #e8bc0c;
   height: 3px;
 
   margin: 0 25px 0 15px;
 
   div {
     width: ${(props) => props.trajectory}%;
-    background: #2d9cdb;
-  }
+    background: ${({theme}) => theme.colors.white.base};
 `;
 
 export const CardFooter = styled.footer`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
-  background: #fff;
+  padding: 0 19px 18px;
+  margin: 0 28px;
+  background: ${({theme}) => theme.colors.white.base};
+  border-radius: 0 0 12px 12px;
 
-  padding: 0 0 36px 36px;
-  border-radius: 0 0 30px 30px;
-  span {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 10px;
-    line-height: 17px;
-    /* identical to box height, or 170% */
-
-    /* Gray 3 */
-
-    color: #828282;
+  div {
+    span {
+      font-style: normal;
+      font-size: 0.8rem;
+      border: none;
+      color: #828282;
+    }
   }
 `;
 
@@ -190,4 +227,11 @@ export const Avatar = styled.div`
     border-radius: 30px;
     margin-right: 6px;
   }
+`;
+
+export const Details = styled.span`
+    padding: 3px 10px;
+    border: 2px solid #ff8900;
+    border-radius: 21px;
+    font-size: 0.6rem;
 `;
