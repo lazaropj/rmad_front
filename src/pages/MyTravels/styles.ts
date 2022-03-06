@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.section`
   max-width: 423px;
-  height: 500px;
 
   border: 1px solid ${({theme}) => theme.colors.gray[100]};
   filter: drop-shadow(0px 3px 16px rgba(0, 0, 0, 0.25));
+  box-shadow: inset 0 0 96px #0000008f;
+
   overflow: hidden;
 
   padding-bottom: 25px;
@@ -45,9 +46,74 @@ export const CardHeader = styled.header`
   z-index: 0;
 
   .collapse {
-    position: absolute;
-    top: 75px;
-    left: 27px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    width: -webkit-fill-available;
+    height: 104px;
+
+    box-shadow: inset 0 0 24px #f0da8a96;
+    background-color: #544a1c42;
+    border: 1px solid #988d642e;
+    border-radius: 12px 12px 0 0;
+
+    padding: 14px;
+
+    -webkit-animation: slide-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+    h2 {
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      font-weight: normal;
+    }
+
+    .btn-group {
+      flex-wrap: wrap;
+      border-radius: 55px;
+
+      overflow: hidden;
+      height: 44px;
+      width: inherit;
+
+      box-shadow: 0px 0px 50px 10px rgb(255 209 40 / 62%);
+
+      .btn-primary {
+        color: ${({ theme }) => theme.colors.white};
+        background-color: #ffd428;
+        border-color: #fdc90d;
+
+        font-weight: 600;
+      }
+    }
+
+    /**
+    * ----------------------------------------
+    * animation slide-top
+    * ----------------------------------------
+    */
+    @-webkit-keyframes slide-top {
+      0% {
+        -webkit-transform: translateY(50px);
+                transform: translateY(50px);
+      }
+      100% {
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+      }
+    }
+    @keyframes slide-top {
+      0% {
+        -webkit-transform: translateY(50px);
+                transform: translateY(50px);
+      }
+      100% {
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+      }
+    }
   }
 `;
 
@@ -68,9 +134,9 @@ export const ButtonAction = styled.div`
     font-size: 0.8rem;
     font-weight: 600;
 
-    background-color: ${({theme}) => theme.colors.primary};
-    color: ${({theme}) => theme.colors.black[100]};
-    border: 1px solid ${({theme}) => theme.colors.primary};
+    background-color: #514617;
+    color: #ffffff;
+    border: 1px solid #514617;
   }
 `;
 
@@ -100,7 +166,8 @@ export const CardBody = styled.div`
   margin: 0 28px;
   z-index: 0;
 
-  border-radius: 12px 0 0 0;
+  border-top: 2px solid ${({theme}) => theme.colors.primary};
+
   background: ${({theme}) => theme.colors.white.base};
 
   span {
@@ -131,7 +198,7 @@ export const CardBody = styled.div`
     font-size: 0.8rem;
     line-height: 1rem;
 
-    color: #828282;
+    color: ${({theme}) => theme.colors.black[100]};
 
     margin-bottom: 0;
 
@@ -149,11 +216,10 @@ export const Intinerary = styled.div`
   padding: 12px;
   margin-bottom: 18px;
 
-  background: ${({theme}) => theme.colors.primary};
   border-radius: 12px;
-  border: 1px solid #ffd015;
-
-  box-shadow: inset 0 0 15px #eab112;
+  background: #ffc107;
+  border: 1px solid #ffd0156e;
+  box-shadow: inset 0 0 15px #eab1123d;
 
   div:last-child {
     span {
@@ -200,6 +266,7 @@ export const Level = styled.div<LevelProps>`
   div {
     width: ${(props) => props.trajectory}%;
     background: ${({theme}) => theme.colors.white.base};
+  }
 `;
 
 export const CardFooter = styled.footer`
@@ -229,7 +296,7 @@ export const Avatar = styled.div`
   }
 `;
 
-export const Details = styled.span`
+export const Details = styled.button`
     padding: 3px 10px;
     border: 2px solid #ff8900;
     border-radius: 21px;
