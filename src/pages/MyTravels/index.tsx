@@ -1,35 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { Button, ButtonGroup, Card, CardBody, Collapse } from 'reactstrap';
+import React, { useEffect, useState, createContext, useContext } from 'react';
+import { Button, ButtonGroup, Collapse } from 'reactstrap';
 import { dateFormat } from 'src/utils/dateFormat';
 import { api } from 'src/services';
-import star from 'src/assets/images/svg/star.svg';
+
 
 import * as Style from './styles';
+import { TravelDetails } from '../TravelDetails';
+import { useModal } from 'src/providers/hooks/context';
 
 export type Travel = {
-  id?: number;
+  ID: number;
   CreatedAt: string;
-  UpdatedAt?: string;
-  DeletedAt?: string;
+  UpdatedAt: string;
+  DeletedAt: string;
   title: string;
-  description?: string;
-  route?: string;
+  description: string;
+  route: string;
   start_date: string;
   finish_date: string | null;
   code: string;
-  user_id?: number;
+  user_id: number;
 };
 
 export const MyTravels: React.FC = () => {
   const [travels, setTravels] = useState<Travel[]>([]);
   const [trajectory, setTrajectory] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
-  const [vote, setVote] = useState<Number>(0);
+  const [vote, setVote] = useState<number>(0);
+  const [travelId, setTravelId] = useState<number>(0);
+  const { toggleModal, modal } = useModal();
 
   const changeTrajectory = (value: number) => {
     setTrajectory(value);
   }
-  
+
   const addVote = (value:number) => {
     setVote(value);
   }
@@ -55,7 +59,8 @@ export const MyTravels: React.FC = () => {
               'Content-Type': 'application/json'
             },
           }).then((response) => {
-            if(response.status === 200 && response.data.status === 'success') {
+            console.log(response);
+            if(response.status === 200) {
               alert('Voto adicionado com sucesso');
             }
           });
@@ -66,6 +71,23 @@ export const MyTravels: React.FC = () => {
       setVote(0);
     }
   }
+
+  const handleDetails = (id: number, e: any)  => {
+    if (!id) {
+      alert('Id indisponível')
+      return;
+    }
+
+    e.preventDefault();
+    console.log(e, 'event')
+    setTravelId(id);
+
+    toggleModal({
+      details: {
+        isOpen: true,
+      },
+    });
+  };
 
   useEffect(() => {
     setVote(vote)
@@ -98,7 +120,8 @@ export const MyTravels: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <>
+      {modal?.details?.isOpen && <TravelDetails travels={travels} ID={travelId} />}  
       {
         travels.map((item: Travel) => (
           <Style.Container key={item.code}>
@@ -110,30 +133,24 @@ export const MyTravels: React.FC = () => {
                   {isOpen ? 'Enviar' : 'Avaliar'}
                 </Button>
               </Style.ButtonAction>
-              <Collapse
-                style={{
-                  display: isOpen ? 'block' : 'none',
-                }}
-              >
-                <Card>
-                  <CardBody>
-                    <ButtonGroup>{
-                      Array.from({ length: 10 }).map((item, index) => (
-                        <Button
-                          value={index +1}
-                          key={index}
-                          color="primary"
-                          onClick={() => {addVote(index +1)}}
-                        
-                        >{index + 1}</Button>
-                      ))}
-                    </ButtonGroup>
-                  </CardBody>
-                </Card>
+                <Collapse
+                  style={{
+                    display: isOpen ? 'block' : 'none',
+                  }}
+                >
+                  <h2>Qual nota você dá para esse trajeto?</h2>
+                  <ButtonGroup>{
+                    Array.from({ length: 9 }).map((item, index) => (
+                      <Button
+                        value={index +1}
+                        key={index}
+                        color="primary"
+                        onClick={() => {addVote(index +1)}}
+                      
+                      ><span>{index + 1}</span></Button>
+                    ))}
+                  </ButtonGroup>
               </Collapse>
-              <Style.Flag>
-                <span>Code: {item.code ? item.code : 'indisponível'}</span>
-              </Style.Flag>
             </Style.CardHeader>
             <Style.CardBody>
               <span>Rota: {item.route}</span>
@@ -158,11 +175,11 @@ export const MyTravels: React.FC = () => {
                 <img src="https://via.placeholder.com/17x17" alt="Avatar" />
                 <span>Name {item.code}</span>
               </Style.Avatar>
-              <Style.Details>Detalhar</Style.Details>
+              <button onClick={(e: any) => handleDetails(item.ID, e)}>Detalhar</button>
             </Style.CardFooter>
           </Style.Container>
         ))
       }
-    </div>
+    </>
   );
 };

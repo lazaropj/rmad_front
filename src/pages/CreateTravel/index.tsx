@@ -1,20 +1,22 @@
 import moment from 'moment';
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { Alert, Button, FormGroup, Label } from 'reactstrap';
+import { Button, FormGroup, Label } from 'reactstrap';
 import { Input } from 'src/components';
 import { api } from 'src/services';
 import * as Style from './styles';
 
 type TravelParams = {
+  id?: number,
+  user_id?: string,
+  createdAt?: string,
   title: string;
   description: string;
   route: string;
   start_date: string;
   finish_date?: string;
   code?: string;
-  hour?: string;
 };
 
 export const CreateTravel: React.FC = () => {
@@ -22,7 +24,7 @@ export const CreateTravel: React.FC = () => {
   const navigate = useNavigate();
   const { handleSubmit: ProviderSubmit } = methods;
 
-  const handleSubmit: SubmitHandler<TravelParams> = async ( {title, description, route, start_date,  finish_date, code, hour}, event) => {
+  const handleSubmit: SubmitHandler<TravelParams> = async ( {id, user_id, createdAt, title, description, route, start_date,  finish_date, code}, event) => {
 
     console.log('Dados que vieram do inputs', start_date);
 
@@ -31,6 +33,11 @@ export const CreateTravel: React.FC = () => {
       description: description,
       route: route,
       start_date: String(moment(start_date).format('YYYY-MM-DDTHH:mm:ssZ')),
+      id: id,
+      user_id: user_id,
+      createdAt: createdAt,
+      finish_date: finish_date,
+      code: code
     }
     console.log('Dados que vieram do inputs', config.start_date);
     const tokenLocal = localStorage.getItem('@rmad::token');
