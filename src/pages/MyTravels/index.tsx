@@ -28,6 +28,7 @@ export const MyTravels: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [vote, setVote] = useState<number>(0);
   const [travelId, setTravelId] = useState<number>(0);
+  const [position, setPosition] = useState<number>(0);
   const { toggleModal, modal } = useModal();
 
   const changeTrajectory = (value: number) => {
@@ -72,16 +73,19 @@ export const MyTravels: React.FC = () => {
     }
   }
 
-  const handleDetails = (id: number, e: any)  => {
-    if (!id) {
-      alert('Id indisponível')
-      return;
-    }
+  const handleCloseDetails = () => {
+    setTravelId(0);
+    setPosition(0);
+    toggleModal({
+      details: {
+        isOpen: false,
+      },
+    });
+  }
 
-    e.preventDefault();
-    console.log(e, 'event')
-    setTravelId(id);
-
+  const handleDetails = (travelId: number, position: number)  => {
+    setTravelId(travelId);
+    setPosition(position);
     toggleModal({
       details: {
         isOpen: true,
@@ -90,8 +94,16 @@ export const MyTravels: React.FC = () => {
   };
 
   useEffect(() => {
+    if(position === 0 || travelId === 0) {
+      handleCloseDetails();
+      return
+    }
+
+    handleDetails(travelId, position);
+  }, [position, travelId]);
+
+  useEffect(() => {
     setVote(vote)
-    console.log('addVote', vote);
   }, [vote]);
 
   useEffect(() => {
@@ -121,11 +133,11 @@ export const MyTravels: React.FC = () => {
 
   return (
     <>
-      {modal?.details?.isOpen && <TravelDetails travels={travels} ID={travelId} />}  
+      {modal?.details?.isOpen && <TravelDetails handleCloseDetails={handleCloseDetails} top={position} travels={travels} ID={travelId} />}  
       {
         travels.map((item: Travel) => (
           <Style.Container key={item.code}>
-            <Style.CardHeader>
+            <Style.CardHeader  >
               <Style.ButtonAction>
                 <Button
                   onClick={() => sendVote(item.code)}
@@ -175,7 +187,10 @@ export const MyTravels: React.FC = () => {
                 <img src="https://via.placeholder.com/17x17" alt="Avatar" />
                 <span>Name {item.code}</span>
               </Style.Avatar>
-              <button onClick={(e: any) => handleDetails(item.ID, e)}>Detalhar</button>
+              <button onClick={(e: any) => {
+                setPosition(parseInt(e.target.parentNode.parentNode.offsetTop));
+                setTravelId(item.ID);
+              }}>Detalhar</button>
             </Style.CardFooter>
           </Style.Container>
         ))

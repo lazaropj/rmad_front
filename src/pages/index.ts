@@ -3,3 +3,4 @@ export * from './SignIn';
 export * from './MyTravels';
 export * from './CreateTravel';
 export * from './TravelDetails';
+export * from './Register';
