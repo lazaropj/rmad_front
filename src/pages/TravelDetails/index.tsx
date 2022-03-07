@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import * as Styles from './styles';
 import { dateFormat } from 'src/utils/dateFormat';
 
@@ -20,17 +20,17 @@ interface Travel {
   travels: ITravel[];
   ID: number;
   top: number;
+  width: number;
+  height: number;
   handleCloseDetails: () => void;
 }
 
-export const TravelDetails: React.FC<Travel> = ({travels, ID, top, handleCloseDetails}) => {
-  console.log('travels details', travels)
-  console.log('travels details id', ID)
+export const TravelDetails: React.FC<Travel> = ({travels, ID, top, width, height, handleCloseDetails}) => {
 
   const travelSelected = travels.filter((travel) => travel.ID === ID);
 
   return(
-      <Styles.Container position={top}>
+      <Styles.Container height={height} width={width} position={top}>
         <Styles.Header>
           <p onClick={handleCloseDetails}>X</p>
         </Styles.Header>

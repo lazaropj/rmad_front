@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup, Collapse } from 'reactstrap';
 import { dateFormat } from 'src/utils/dateFormat';
 import { api } from 'src/services';
@@ -29,6 +29,9 @@ export const MyTravels: React.FC = () => {
   const [vote, setVote] = useState<number>(0);
   const [travelId, setTravelId] = useState<number>(0);
   const [position, setPosition] = useState<number>(0);
+  const [width, setWidth] = useState<number>(0);
+  const [height, setHeight] = useState<number>(0);
+  
   const { toggleModal, modal } = useModal();
 
   const changeTrajectory = (value: number) => {
@@ -133,7 +136,7 @@ export const MyTravels: React.FC = () => {
 
   return (
     <>
-      {modal?.details?.isOpen && <TravelDetails handleCloseDetails={handleCloseDetails} top={position} travels={travels} ID={travelId} />}  
+      {modal?.details?.isOpen && <TravelDetails height={height} width={width} handleCloseDetails={handleCloseDetails} top={position} travels={travels} ID={travelId} />}  
       {
         travels.map((item: Travel) => (
           <Style.Container key={item.code}>
@@ -190,6 +193,8 @@ export const MyTravels: React.FC = () => {
               <button onClick={(e: any) => {
                 setPosition(parseInt(e.target.parentNode.parentNode.offsetTop));
                 setTravelId(item.ID);
+                setWidth(parseInt(e.target.parentNode.parentNode.offsetWidth));
+                setHeight(parseInt(e.target.parentNode.parentNode.offsetHeight));
               }}>Detalhar</button>
             </Style.CardFooter>
           </Style.Container>
