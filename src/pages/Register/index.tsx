@@ -40,7 +40,7 @@ export const Register: React.FC = () => {
         }
       });
     } catch (error) {
-      console.error('Erro CreateTravel', error);
+      console.error('Erro no registro de usuário', error);
     }
   };
   return (
