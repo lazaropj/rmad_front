@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { Button, FormGroup, Label } from 'reactstrap';
 import { Input } from 'src/components';
 import { api } from 'src/services';
@@ -20,6 +21,7 @@ type Form = {
 export const Register: React.FC = () => {
   const methods = useForm<Form>();
   const { handleSubmit: ProviderSubmit } = methods;
+  const navigate = useNavigate();
 
   const handleSubmit: SubmitHandler<Form> = async ({ email, password }) => {
     const config: IData = {
@@ -37,6 +39,7 @@ export const Register: React.FC = () => {
         console.log(response);
         if(response.status === 200) {
           alert('Usuário registrado com sucesso');
+          navigate('/login')
         }
       });
     } catch (error) {

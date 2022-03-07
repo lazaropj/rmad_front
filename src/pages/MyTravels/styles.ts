@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.section`
-  max-width: 423px;
+  max-width: 391px;
 
   border: 1px solid ${({theme}) => theme.colors.gray[100]};
   filter: drop-shadow(0px 3px 16px rgba(0, 0, 0, 0.25));
