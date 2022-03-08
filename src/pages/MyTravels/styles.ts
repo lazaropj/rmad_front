@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import bgImg from '../../assets/images/images/bg-map.jpeg'
 
 export const Container = styled.section`
   max-width: 391px;
@@ -25,7 +26,7 @@ export const Container = styled.section`
     left: 0;
     z-index: -1;
     background: ${({ theme }) => theme.colors.white.base};
-    background-image: url('https://images.unsplash.com/photo-1581922819941-6ab31ab79afc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80');
+    background-image: url(${bgImg});
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -274,7 +275,7 @@ export const CardFooter = styled.footer`
   align-items: center;
   justify-content: space-between;
 
-  padding: 0 19px 18px;
+  padding: 15px 19px 18px;
   margin: 0 28px;
   background: ${({theme}) => theme.colors.white.base};
   border-radius: 0 0 12px 12px;
@@ -296,9 +297,13 @@ export const Avatar = styled.div`
   }
 `;
 
-export const Details = styled.button`
+export const Details = styled.div`
+  button {
     padding: 3px 10px;
     border: 2px solid #ff8900;
     border-radius: 21px;
     font-size: 0.6rem;
+    background: transparent;
+    color: ${({theme}) => theme.colors.black[100]};
+  }
 `;
