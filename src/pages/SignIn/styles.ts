@@ -72,7 +72,7 @@ export const FormContainer = styled.section`
 
     input {
       border-radius: 34px;
-      border: 1px solid ${({ theme }) => theme.colors.gray[100]};
+      border: 2px solid ${({ theme }) => theme.colors.black[100]};
       padding: 0 25px;
       font-size: 1rem;
 
@@ -85,6 +85,14 @@ export const FormContainer = styled.section`
 
     button {
       width: 100%;
+      background: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.black[100]};
+      border: 2px solid ${({ theme }) => theme.colors.black[100]};
+
+      &:hover {
+        background: ${({ theme }) => theme.colors.black[100]};
+        color: ${({ theme }) => theme.colors.white.base};
+      }
     }
   }
 `;

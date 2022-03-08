@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import bgImg from '../../assets/images/images/bg-map.jpeg'
 
 export const Container = styled.section`
   max-width: 391px;
@@ -25,7 +26,7 @@ export const Container = styled.section`
     left: 0;
     z-index: -1;
     background: ${({ theme }) => theme.colors.white.base};
-    background-image: url('https://images.unsplash.com/photo-1581922819941-6ab31ab79afc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80');
+    background-image: url(${bgImg});
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
