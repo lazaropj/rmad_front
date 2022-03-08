@@ -192,12 +192,14 @@ export const MyTravels: React.FC = () => {
                 <img src="https://via.placeholder.com/17x17" alt="Avatar" />
                 <span>Name {item.code}</span>
               </Style.Avatar>
-              <button onClick={(e: any) => {
-                setPosition(parseInt(e.target.parentNode.parentNode.offsetTop));
-                setTravelId(item.ID);
-                setWidth(parseInt(e.target.parentNode.parentNode.offsetWidth));
-                setHeight(parseInt(e.target.parentNode.parentNode.offsetHeight));
-              }}>Detalhar</button>
+              <Style.Details>
+                <Button onClick={(e: any) => {
+                  setPosition(parseInt(e.target.parentNode.parentNode.parentNode.offsetTop));
+                  setTravelId(item.ID);
+                  setWidth(parseInt(e.target.parentNode.parentNode.parentNode.offsetWidth));
+                  setHeight(parseInt(e.target.parentNode.parentNode.parentNode.offsetHeight));
+                }}>Detalhar</Button>
+              </Style.Details>
             </Style.CardFooter>
           </Style.Container>
         ))

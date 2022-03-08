@@ -275,7 +275,7 @@ export const CardFooter = styled.footer`
   align-items: center;
   justify-content: space-between;
 
-  padding: 0 19px 18px;
+  padding: 15px 19px 18px;
   margin: 0 28px;
   background: ${({theme}) => theme.colors.white.base};
   border-radius: 0 0 12px 12px;
@@ -297,9 +297,13 @@ export const Avatar = styled.div`
   }
 `;
 
-export const Details = styled.button`
+export const Details = styled.div`
+  button {
     padding: 3px 10px;
     border: 2px solid #ff8900;
     border-radius: 21px;
     font-size: 0.6rem;
+    background: transparent;
+    color: ${({theme}) => theme.colors.black[100]};
+  }
 `;
