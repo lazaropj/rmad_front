@@ -27,6 +27,7 @@ export const MyTravels: React.FC = () => {
   const [trajectory, setTrajectory] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [vote, setVote] = useState<number>(0);
+  const [code, setCode] = useState<string>('');
   const [travelId, setTravelId] = useState<number>(0);
   const [position, setPosition] = useState<number>(0);
   const [width, setWidth] = useState<number>(0);
@@ -44,6 +45,7 @@ export const MyTravels: React.FC = () => {
 
   const sendVote = async (code: string) => {
     setIsOpen(!isOpen); 
+    setCode(code)
     if (isOpen) {
       const config = {
         vote: vote,
@@ -150,7 +152,7 @@ export const MyTravels: React.FC = () => {
               </Style.ButtonAction>
                 <Collapse
                   style={{
-                    display: isOpen ? 'block' : 'none',
+                    display: isOpen && item.code === code ? 'block' : 'none',
                   }}
                 >
                   <h2>Qual nota você dá para esse trajeto?</h2>
