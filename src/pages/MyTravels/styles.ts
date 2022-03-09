@@ -1,7 +1,23 @@
 import styled from 'styled-components';
 import bgImg from '../../assets/images/images/bg-map.jpeg'
 
-export const Container = styled.section`
+
+export const Container = styled.div``;
+
+export const AlertContainer = styled.div``;
+
+export const TextHeader = styled.div`
+  display: flex;
+  justify-content: center;
+  p {
+    font-size: 0.8rem;
+    margin-top: 25px;
+    text-align: center;
+    width: 90%;
+  }
+`;
+
+export const CardContainer = styled.section`
   max-width: 391px;
 
   border: 1px solid ${({theme}) => theme.colors.gray[100]};
@@ -32,17 +48,32 @@ export const Container = styled.section`
     background-repeat: no-repeat;
     opacity: 0.2;
   }
+
+  p {
+    margin-top: 25px;
+  }
+
+  .alert {
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
+    left: 18%;
+    width: 250px;
+    
+    border-radius: 0 0 30px 30px;
+  }
 `;
 
 export const CardHeader = styled.header`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: flex-end;
 
   height: 235px;
 
-  padding: 30px 28px 0 28px;
+  padding: 35px 28px 0 28px;
   overflow: hidden;
   z-index: 0;
 
@@ -126,6 +157,7 @@ export const ButtonAction = styled.div`
   width: 92px;
   height: fit-content;
   border-radius: 50px;
+  margin-bottom: 15px;
 
   .btn {
     width: inherit;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, ButtonGroup, Collapse } from 'reactstrap';
+import { Alert, Button, ButtonGroup, Collapse } from 'reactstrap';
 import { dateFormat } from 'src/utils/dateFormat';
 import { api } from 'src/services';
 
@@ -22,6 +22,11 @@ export type Travel = {
   user_id: number;
 };
 
+type AlertProps = {
+  message?: string;
+  state: boolean;
+  color?: string;
+}
 export const MyTravels: React.FC = () => {
   const [travels, setTravels] = useState<Travel[]>([]);
   const [trajectory, setTrajectory] = useState(0);
@@ -32,6 +37,7 @@ export const MyTravels: React.FC = () => {
   const [position, setPosition] = useState<number>(0);
   const [width, setWidth] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
+  const [isOpenAlert, setIsOpenAlert] = useState<AlertProps>({state: false, message: '', color: ''});
   
   const { toggleModal, modal } = useModal();
 
@@ -53,9 +59,12 @@ export const MyTravels: React.FC = () => {
       }
 
       if(vote === 0) {
-        alert('Você não avaliou o trajeto');
+        setIsOpenAlert({state: true, message:'Você não votou ainda', color: 'danger'})
+        setTimeout(() => {
+          setIsOpenAlert({state: false, color: 'danger'});
+        }, 2000);
         return;
-      }else {
+      } else {
         const tokenLocal = localStorage.getItem('@rmad::token');
         try {
           await api.post('/travel/vote', config, {
@@ -67,7 +76,10 @@ export const MyTravels: React.FC = () => {
           }).then((response) => {
             console.log(response);
             if(response.status === 200) {
-              alert('Voto adicionado com sucesso');
+              setIsOpenAlert({state: true, message:'Você votou com sucesso', color: 'success'});
+              setTimeout(() => {
+                setIsOpenAlert({state: false});
+              }, 2000);
             }
           });
         } catch (error) {
@@ -137,11 +149,18 @@ export const MyTravels: React.FC = () => {
   }, []);
 
   return (
-    <>
-      {modal?.details?.isOpen && <TravelDetails height={height} width={width} handleCloseDetails={handleCloseDetails} top={position} travels={travels} ID={travelId} />}  
+    <Style.Container>
+      {modal?.details?.isOpen && <TravelDetails height={height} width={width} handleCloseDetails={handleCloseDetails} top={position} travels={travels} ID={travelId} />}
+      {modal?.details?.isOpen && <TravelDetails height={height} width={width} handleCloseDetails={handleCloseDetails} top={position} travels={travels} ID={travelId} />}
+      <Style.TextHeader><p>Bem vindo! Escolha "Detalhar" para acessar as informações completas ou em "Avaliar" para atribuir notas aos seus tragetos.</p></Style.TextHeader>
       {
         travels.map((item: Travel) => (
-          <Style.Container key={item.code}>
+          <Style.CardContainer key={item.code}>
+          {
+            <Alert fade={true} color={isOpenAlert.color} isOpen={isOpenAlert.state && item.code === code} dismissible>
+              {isOpenAlert.message}
+            </Alert>
+          }
             <Style.CardHeader  >
               <Style.ButtonAction>
                 <Button
@@ -201,9 +220,9 @@ export const MyTravels: React.FC = () => {
                 }}>Detalhar</Button>
               </Style.Details>
             </Style.CardFooter>
-          </Style.Container>
+          </Style.CardContainer>
         ))
       }
-    </>
+    </Style.Container>
   );
 };
