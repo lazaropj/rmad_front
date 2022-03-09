@@ -7,7 +7,7 @@ export const Title = styled.div`
   justify-content: center;
   width: 80%
   margin: 0 auto;
-  margin-top: 70px;
+  margin: 35px 0;
 
   h3 {
     text-align: center;
@@ -20,7 +20,9 @@ export const FormContainer = styled.div`
     border-radius: 50px;
     overflow: hidden;
     background: #514617;
-    color: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.white.base};
+    font-size: 0.8rem;
+    padding: 0 30px;
 
     :focus {
       background: #514617;
@@ -47,10 +49,12 @@ export const FormContainer = styled.div`
 
   label:first-child {
     padding: 0;
+    font-size: 1rem;
   }
 
   label {
     padding: 30px;
+    font-size: 0.8rem;
   }
 
   button {
@@ -58,6 +62,8 @@ export const FormContainer = styled.div`
     color: ${({ theme }) => theme.colors.black[100]};
     width: 100%;
     border: 2px solid ${({ theme }) => theme.colors.black[100]};
+
+    margin-top: 30px;
 
     &:hover {
       background: ${({ theme }) => theme.colors.black[100]};

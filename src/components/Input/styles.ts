@@ -84,8 +84,8 @@ export const Container = styled.div<Props>`
 
   div {
     position: absolute;
-    right: 0;
-    bottom: 16px;
+    right: 16px;
+    bottom: 23px;
 
     img {
     }
