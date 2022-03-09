@@ -94,7 +94,7 @@ export const SignInPage: React.FC = () => {
               </form>
             </S.FormContainer>
             <a href="/">Esqueci minha senha</a>
-            <a href="/">Não tem cadastro?</a>
+            <a href="/register">Não tem cadastro?</a>
           </S.Main>
         </S.Container>
       </Col>
