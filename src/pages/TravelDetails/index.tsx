@@ -19,24 +19,27 @@ export type ITravel = {
 interface Travel {
   travels: ITravel[];
   ID: number;
-  top: number;
+  position: {
+    top: number;
+    left: number;
+  };
   width: number;
   height: number;
   handleCloseDetails: () => void;
 }
 
-export const TravelDetails: React.FC<Travel> = ({travels, ID, top, width, height, handleCloseDetails}) => {
+export const TravelDetails: React.FC<Travel> = ({travels, ID, width, height, position, handleCloseDetails}) => {
 
   const travelSelected = travels.filter((travel) => travel.ID === ID);
 
   return(
-      <Styles.Container height={height} width={width} position={top}>
+      <Styles.Container height={height} width={width} position={position}>
         <Styles.Header>
           <p onClick={handleCloseDetails}>X</p>
         </Styles.Header>
           {travelSelected.map((travel) => {
             return(
-              <Styles.TableHeader>
+              <Styles.TableHeader key={travel.ID}>
                 <span>Code: <strong>{travel.code} </strong></span>
                 <span>ID do Usuário: <strong>{travel.user_id}</strong></span>
                 <h2>{travel.route}</h2>

@@ -5,6 +5,7 @@ import { Button, Col, Container, FormGroup, Label, Row } from 'reactstrap';
 import { Input } from 'src/components';
 import { useAuth } from 'src/providers/hooks/context/auth';
 import { emailRegExp } from 'src/validators/email';
+import logo from 'src/assets/images/svg/logo.svg';
 
 import * as S from './styles';
 
@@ -41,7 +42,7 @@ export const SignInPage: React.FC = () => {
         <S.Container>
           <S.Header>
             <S.Logo>
-              <img alt="Logo" src="https://via.placeholder.com/176x72" />
+              <img alt="Logo" src={logo} />
             </S.Logo>
             <p>Informe seu login e senha para acessar a aplicação</p>
           </S.Header>

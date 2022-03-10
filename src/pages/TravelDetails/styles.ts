@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
 interface Props {
-  position: number;
+  position: {
+    top: number;
+    left: number;
+  };
   width: number;
   height: number;
 }
@@ -11,7 +14,8 @@ export const Container = styled.div<Props>`
   overflow: hidden;
 
   position: absolute;
-  top: ${(props) => props.position}px;
+  top: ${(props) => props.position.top}px;
+  left: ${(props) => props.position.left}px;
   padding: 30px;
 
   width: ${(props) => props.width}px;
