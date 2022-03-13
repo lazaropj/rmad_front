@@ -3,7 +3,6 @@ import { Alert, Button, ButtonGroup, Collapse } from 'reactstrap';
 import { dateFormat } from 'src/utils/dateFormat';
 import { api } from 'src/services';
 
-
 import * as Style from './styles';
 import { TravelDetails } from '../TravelDetails';
 import { useModal } from 'src/providers/hooks/context';
@@ -27,6 +26,12 @@ type AlertProps = {
   state: boolean;
   color?: string;
 }
+
+type PositionCardProps = {
+  top: number;
+  left: number;
+}
+
 export const MyTravels: React.FC = () => {
   const [travels, setTravels] = useState<Travel[]>([]);
   const [trajectory, setTrajectory] = useState(0);
@@ -34,7 +39,8 @@ export const MyTravels: React.FC = () => {
   const [vote, setVote] = useState<number>(0);
   const [code, setCode] = useState<string>('');
   const [travelId, setTravelId] = useState<number>(0);
-  const [position, setPosition] = useState<number>(0);
+ // const [position, setPosition] = useState<number>(0);
+  const [position, setPosition] = useState<PositionCardProps>({top: 0, left: 0});
   const [width, setWidth] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
   const [isOpenAlert, setIsOpenAlert] = useState<AlertProps>({state: false, message: '', color: ''});
@@ -92,7 +98,7 @@ export const MyTravels: React.FC = () => {
 
   const handleCloseDetails = () => {
     setTravelId(0);
-    setPosition(0);
+    setPosition({top: 0, left: 0});
     toggleModal({
       details: {
         isOpen: false,
@@ -100,9 +106,10 @@ export const MyTravels: React.FC = () => {
     });
   }
 
-  const handleDetails = (travelId: number, position: number)  => {
+  const handleDetails = (travelId: number, position: any)  => {
     setTravelId(travelId);
     setPosition(position);
+    console.log(position);
     toggleModal({
       details: {
         isOpen: true,
@@ -111,13 +118,13 @@ export const MyTravels: React.FC = () => {
   };
 
   useEffect(() => {
-    if(position === 0 || travelId === 0) {
+    if(position.top === 0 || travelId === 0) {
       handleCloseDetails();
       return
     }
 
     handleDetails(travelId, position);
-  }, [position, travelId]);
+  }, [position.top, travelId]);
 
   useEffect(() => {
     setVote(vote)
@@ -150,9 +157,8 @@ export const MyTravels: React.FC = () => {
 
   return (
     <Style.Container>
-      {modal?.details?.isOpen && <TravelDetails height={height} width={width} handleCloseDetails={handleCloseDetails} top={position} travels={travels} ID={travelId} />}
-      {modal?.details?.isOpen && <TravelDetails height={height} width={width} handleCloseDetails={handleCloseDetails} top={position} travels={travels} ID={travelId} />}
-      <Style.TextHeader><p>Bem vindo! Escolha "Detalhar" para acessar as informações completas ou em "Avaliar" para atribuir notas aos seus tragetos.</p></Style.TextHeader>
+      {modal?.details?.isOpen && <TravelDetails height={height} width={width} handleCloseDetails={handleCloseDetails} position={position} travels={travels} ID={travelId} />}
+      <Style.TextHeader><p>Bem vindo! Escolha "Detalhar" para acessar as informações completas ou em "Avaliar" para atribuir notas aos tragetos cadastrados.</p></Style.TextHeader>
       {
         travels.map((item: Travel) => (
           <Style.CardContainer key={item.code}>
@@ -166,7 +172,7 @@ export const MyTravels: React.FC = () => {
                 <Button
                   onClick={() => sendVote(item.code)}
                 >
-                  {isOpen ? 'Enviar' : 'Avaliar'}
+                  {isOpen && item.code === code  ? 'Enviar' : 'Avaliar'}
                 </Button>
               </Style.ButtonAction>
                 <Collapse
@@ -213,7 +219,10 @@ export const MyTravels: React.FC = () => {
               </Style.Avatar>
               <Style.Details>
                 <Button onClick={(e: any) => {
-                  setPosition(parseInt(e.target.parentNode.parentNode.parentNode.offsetTop));
+                  setPosition({
+                    top: parseInt(e.target.parentNode.parentNode.parentNode.offsetTop),
+                    left: parseInt(e.target.parentNode.parentNode.parentNode.offsetLeft),
+                  });
                   setTravelId(item.ID);
                   setWidth(parseInt(e.target.parentNode.parentNode.parentNode.offsetWidth));
                   setHeight(parseInt(e.target.parentNode.parentNode.parentNode.offsetHeight));

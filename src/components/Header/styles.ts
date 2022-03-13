@@ -18,7 +18,7 @@ export const Menu = styled.div`
 `;
 
 export const Logo = styled.div`
-  margin-top: 15px;
+  margin-bottom: 15px;
   width: 60px;
   height: 40px;
 `;

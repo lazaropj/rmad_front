@@ -1,9 +1,10 @@
+import React, { useState } from 'react';
 import moment from 'moment';
-import React from 'react';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Button, FormGroup, Label } from 'reactstrap';
 import { Input } from 'src/components';
+import DateTimePicker from 'react-datetime-picker';
 import { api } from 'src/services';
 import * as Style from './styles';
 
@@ -23,23 +24,21 @@ export const CreateTravel: React.FC = () => {
   const methods = useForm<TravelParams>();
   const navigate = useNavigate();
   const { handleSubmit: ProviderSubmit } = methods;
+  const [value, onChange] = useState(new Date());
 
   const handleSubmit: SubmitHandler<TravelParams> = async ( {id, user_id, createdAt, title, description, route, start_date,  finish_date, code}, event) => {
-
-    console.log('Dados que vieram do inputs', start_date);
 
     const config: TravelParams = {
       title: title,
       description: description,
       route: route,
-      start_date: String(moment(start_date).format('YYYY-MM-DDTHH:mm:ssZ')),
+      start_date: String(moment(value).format('YYYY-MM-DDTHH:mm:ssZ')),
       id: id,
       user_id: user_id,
       createdAt: createdAt,
       finish_date: finish_date,
       code: code
     }
-    console.log('Dados que vieram do inputs', config.start_date);
     const tokenLocal = localStorage.getItem('@rmad::token');
 
     try {
@@ -72,13 +71,14 @@ export const CreateTravel: React.FC = () => {
           )}
           >
           <FormProvider {...methods}>
+            <Style.InputsContainer>
             <FormGroup>
               <Label for="title">Título</Label>
               <Input
                 className="form-control"
                 id="title"
                 name="title"
-                placeholder="Diga o que você está planejando fazer"
+                placeholder="O que você está planejando"
                 type="text"
               />
             </FormGroup>
@@ -88,7 +88,7 @@ export const CreateTravel: React.FC = () => {
                 className="form-control"
                 id="description"
                 name="description"
-                placeholder="descreva o que você está planejando"
+                placeholder="Descreva qual o seu plano"
                 type="text"
               />
             </FormGroup>
@@ -98,21 +98,18 @@ export const CreateTravel: React.FC = () => {
                 className="form-control"
                 id="route"
                 name="route"
-                placeholder="descreva o que você está planejando"
+                placeholder="Qual será a rota?"
                 type="text"
               />
             </FormGroup>
-            <FormGroup>
-              <Label for="start_date">Data de Início</Label>
-              <Input
-                className="form-control"
-                id="start_date"
-                name="start_date"
-                placeholder="informe quando"
-                type="datetime-local"
-              />
-            </FormGroup>
-            <Button type="submit">entrar</Button>
+            </Style.InputsContainer>
+            <Style.DatePickerContainer>
+              <Label>Quando</Label>
+              <DateTimePicker calendarClassName="react-datetime-custom" locale="pt-BR" secondAriaLabel="teste" amPmAriaLabel="pm" onChange={onChange} value={value} />
+            </Style.DatePickerContainer>
+            <Style.ButtonContainer>
+              <Button type="submit" onClick={() => console.log(value)}>Criar rota</Button>
+            </Style.ButtonContainer>
           </FormProvider>
         </form>
       </Style.FormContainer>

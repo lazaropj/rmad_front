@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Styles from './styles';
 import { dateFormat } from 'src/utils/dateFormat';
+import { ChartDetails } from './chartDetails';
 
 export type ITravel = {
   ID: number;
@@ -19,36 +20,37 @@ export type ITravel = {
 interface Travel {
   travels: ITravel[];
   ID: number;
-  top: number;
+  position: {
+    top: number;
+    left: number;
+  };
   width: number;
   height: number;
   handleCloseDetails: () => void;
 }
 
-export const TravelDetails: React.FC<Travel> = ({travels, ID, top, width, height, handleCloseDetails}) => {
+export const TravelDetails: React.FC<Travel> = ({travels, ID, width, height, position, handleCloseDetails}) => {
 
   const travelSelected = travels.filter((travel) => travel.ID === ID);
 
   return(
-      <Styles.Container height={height} width={width} position={top}>
+      <Styles.Container height={height} width={width} position={position}>
         <Styles.Header>
-          <p onClick={handleCloseDetails}>X</p>
+          <Styles.Close onClick={handleCloseDetails} />
         </Styles.Header>
           {travelSelected.map((travel) => {
             return(
-              <Styles.TableHeader>
-                <span>Code: <strong>{travel.code} </strong></span>
-                <span>ID do Usuário: <strong>{travel.user_id}</strong></span>
-                <h2>{travel.route}</h2>
+              <Styles.TableHeader key={travel.ID}>
+                <h2>{travel.title}</h2>
                 <div key={travel.ID}>
-                  <p><strong>Título:</strong>{travel.title}</p>
-                  <p><strong>Descrição:</strong> {travel.description}</p>
-                  <p>Partida: <strong> {dateFormat(travel.start_date)}</strong></p>
-                  <p>Chegada: <strong> {dateFormat(travel.finish_date)}</strong></p>
-                  <p>Criado em: <strong> {dateFormat(travel.CreatedAt)}</strong></p>
-                  <p>Atualizando em: <strong> {travel.UpdatedAt ? dateFormat(travel.UpdatedAt) : 'indisponível'}</strong></p>
-                  <p>Deletado em: <strong> {travel.DeletedAt ? dateFormat(travel.DeletedAt) : 'indisponível'}</strong></p>
-                  <p>ID da Rota: <strong> {travel.ID}</strong></p>
+                  <Styles.ChartContainer>
+                    <ChartDetails />
+                  </Styles.ChartContainer>
+                  <p><strong>Descrição: </strong> {travel.description}</p>
+                  <p><strong>Rota: </strong>{travel.route}</p>
+                  <p><strong>Partida: </strong> {dateFormat(travel.start_date)}</p>
+                  <p><strong>Chegada: </strong> {dateFormat(travel.finish_date)}</p>
+                  <p><strong>Criado em: </strong> {dateFormat(travel.CreatedAt)}</p>
                 </div>
               </Styles.TableHeader>
             )

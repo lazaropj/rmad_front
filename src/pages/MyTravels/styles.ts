@@ -2,13 +2,19 @@ import styled from 'styled-components';
 import bgImg from '../../assets/images/images/bg-map.jpeg'
 
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+`;
 
 export const AlertContainer = styled.div``;
 
 export const TextHeader = styled.div`
   display: flex;
   justify-content: center;
+
+  width: 100%;
   p {
     font-size: 0.8rem;
     margin-top: 25px;
@@ -30,7 +36,7 @@ export const CardContainer = styled.section`
   margin: 25px 0;
 
   border-radius: 30px;
-  z-index: -1;
+  z-index: 1;
 
   &::before {
     overflow: hidden;
@@ -118,6 +124,7 @@ export const CardHeader = styled.header`
         border-color: #fdc90d;
 
         font-weight: 600;
+      
       }
     }
 

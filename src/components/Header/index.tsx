@@ -1,18 +1,19 @@
 import React from 'react';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import * as Style from './styles';
+import logo from 'src/assets/images/svg/logo-black.svg';
 
 export const Header: React.FC = () => {
   return (
     <Style.Container>
         <Style.Logo>
-          <img alt="Logo" src="https://via.placeholder.com/60x40" />
+          <img alt="Logo" src={logo} />
         </Style.Logo>
         <Style.Menu>
         <Nav>
           <NavItem>
             <NavLink href="/home">
-              Home
+              Dasboard
             </NavLink>
           </NavItem>
           <NavItem>
