@@ -14,7 +14,7 @@ export const Routes: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" element={<Page.Home />} />
+        <Route path="/" element={<Page.Dashboard />} />
         <Route path="/login" element={<Page.SignInPage />} />
         <Route path="/register" element={<Page.Register />} />
         <Route
@@ -26,7 +26,7 @@ export const Routes: React.FC = () => {
               </>
             }
           >
-            <Route path="/" element={<Page.Home />} />
+            <Route path="/" element={<Page.Dashboard />} />
             <Route path="/" element={<PrivateRoute />}>
               <Route path="travels" element={<Page.MyTravels />} />
               <Route path="new-travel" element={<Page.CreateTravel />} />

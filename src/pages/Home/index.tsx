@@ -1,9 +1,12 @@
 import React from 'react';
 
-export const Home: React.FC = () => {
+import * as Style from './styles';
+
+
+export const Dashboard: React.FC = () => {
   return (
-    <div>
-      <h1>home</h1>
-    </div>
+    <Style.Container>
+      <h1>Dashboard</h1>
+    </Style.Container>
   );
 };

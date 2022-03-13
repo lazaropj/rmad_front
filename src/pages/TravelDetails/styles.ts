@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import bgClose from '../../assets/images/svg/close.svg';
 
 interface Props {
   position: {
@@ -71,14 +72,23 @@ export const Header = styled.div`
   width: 100%;
 `;
 
+export const Close = styled.div`
+  display: block;
+  width: 24px;
+  height: 24px;
+
+  background-image: url(${bgClose});
+`;
+
 export const TableHeader = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   h2 {
     color: ${(props) => props.theme.colors.primary};
-    margin-top: 30px;
+    margin-bottom: 0;
+    top: 36px;
   }
 
   div {
@@ -86,17 +96,27 @@ export const TableHeader = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    height: 85%;
     
     p {
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
       width: 50%;
     }
     p:first-child {
       width: 100%;
-      margin-bottom: 45px;
     }
     p:nth-child(2) {
       width: 100%;
+      margin-top: 25px;
     }
   }
+`;
+
+export const ChartContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 25px;
 `;

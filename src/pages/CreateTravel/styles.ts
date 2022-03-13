@@ -1,22 +1,49 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  .react-calendar {
+    background: ${props => props.theme.colors.primary};
+    border-radius: 7px;
+    margin-bottom: 9px;
+    border: none;
+  }
+
+  .react-datetime-picker__wrapper {
+    border: 2px solid #514617;
+    border-radius: 30px;
+    padding: 15px;
+  }
+
+  .react-calendar__tile--active {
+    background: #514617;
+    color: white;
+    border-radius: 7px;
+  }
+
+  .react-datetime-picker__button:enabled:hover .react-datetime-picker__button__icon, .react-datetime-picker__button:enabled:focus .react-datetime-picker__button__icon {
+    stroke: ${props => props.theme.colors.primary};
+  }
+`;
 
 export const Title = styled.div`
   display: flex;
   justify-content: center;
   width: 80%
   margin: 0 auto;
-  margin: 35px 0;
+  margin: 35px 0 15px 0;
 
   h3 {
     text-align: center;
+    font-size: 1rem;
   }
 `;
 
 export const FormContainer = styled.div`
   color: ${({ theme }) => theme.colors.white};
-  input {
+`;
+
+export const InputsContainer = styled.div`
+    input {
     border-radius: 50px;
     overflow: hidden;
     background: #514617;
@@ -49,15 +76,26 @@ export const FormContainer = styled.div`
 
   label:first-child {
     padding: 0;
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   label {
     padding: 30px;
     font-size: 0.8rem;
   }
+`;
 
-  button {
+export const DatePickerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 0.8rem;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+    button {
     background: ${({ theme }) => theme.colors.primary};
     color: ${({ theme }) => theme.colors.black[100]};
     width: 100%;
