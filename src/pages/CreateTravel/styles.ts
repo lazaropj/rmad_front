@@ -135,21 +135,35 @@ export const ButtonContainer = styled.div`
   gap: 12px;
 
   button {
-  background: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.black[100]};
-  width: 100%;
-  border: none;
+    background: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.black[100]};
+    width: 100%;
+    border: none;
 
-  margin-top: 30px;
+    margin-top: 30px;
+
+    @media (min-width: 768px) {
+      width: 150px;
+    }
 
     &:hover {
-      background: ${({ theme }) => theme.colors.black[100]};
-      color: ${({ theme }) => theme.colors.white.base};
+      background: ${({ theme }) => theme.colors.secondary};
+      color: ${({ theme }) => theme.colors.black[100]};
     }
 
     &:first-child {
       background: ${({ theme }) => theme.colors.black[100]};
       color: ${({ theme }) => theme.colors.white.base};
+
+      &:hover {
+        background: ${({ theme }) => theme.colors.secondary};
+        color: ${({ theme }) => theme.colors.black[100]};
+      }
     }
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: flex-end;
   }
 `;

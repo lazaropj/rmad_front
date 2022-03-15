@@ -16,5 +16,11 @@ export const Container = styled.footer`
 
   span {
     font-size: 0.6rem;
+    color: #ac8c0d;
+  }
+
+  @media (min-width: 768px) {
+    justify-content: flex-end;
+    padding: 0 16px;
   }
 `;

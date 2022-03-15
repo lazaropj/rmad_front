@@ -23,6 +23,10 @@ export const Menu = styled.div`
     color: ${props => props.theme.colors.white.base};
     font-size: 0.8rem;
     text-transform: uppercase;
+
+    &:hover {
+      color: ${props => props.theme.colors.primary};
+    }
   }
 
   ul {

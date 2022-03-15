@@ -86,9 +86,7 @@ export const Container = styled.div<Props>`
     position: absolute;
     right: 16px;
     bottom: 23px;
-
-    img {
-    }
+    top: 15px;
   }
 
   ${({ error, theme }) =>
