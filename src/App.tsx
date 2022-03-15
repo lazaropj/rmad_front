@@ -8,11 +8,11 @@ const App: React.FC = () => {
   const someModalIsActive = Object.values(modal).some(item => item.isOpen);
 
   return (
-    <Container>
+    <>
       <Routes>
         <GlobalStyles modalIsActive={someModalIsActive} />
       </Routes>
-    </Container>
+    </>
   );
 };
 export default App;

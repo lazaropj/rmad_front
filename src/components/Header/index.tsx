@@ -12,8 +12,8 @@ export const Header: React.FC = () => {
         <Style.Menu>
         <Nav>
           <NavItem>
-            <NavLink href="/home">
-              Dasboard
+            <NavLink href="/dashboard">
+              Dashboard
             </NavLink>
           </NavItem>
           <NavItem>
