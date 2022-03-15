@@ -5,9 +5,12 @@ import bgImg from '../../assets/images/images/bg-map.jpeg'
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
 
-  padding: 0 30px;
+  padding: 0 16px;
+  gap: 16px;
+
+  margin-bottom: 64px;
 `;
 
 export const AlertContainer = styled.div``;
@@ -17,11 +20,16 @@ export const TextHeader = styled.div`
   justify-content: center;
 
   width: 100%;
+
   p {
     font-size: 0.8rem;
     margin-top: 25px;
     text-align: center;
     width: 90%;
+
+    @media (min-width: 768px) {
+      margin-top: 50px;
+    }
   }
 `;
 
@@ -35,7 +43,11 @@ export const CardContainer = styled.section`
   overflow: hidden;
 
   padding-bottom: 25px;
-  margin: 25px 0;
+  margin: 8px 0;
+
+  @media (min-width: 768px) {
+    margin: 0;
+  }
 
   border-radius: 30px;
   z-index: 1;

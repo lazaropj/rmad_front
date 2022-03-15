@@ -10,7 +10,7 @@ export const Container = styled.div`
   height: 100vh;
   background: url(${bgImg}) no-repeat center center fixed;
 
-  padding: 0 30px;
+  padding: 0 16px;
 
   &:before {
     content: '';

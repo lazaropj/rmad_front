@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 0 30px;
+  padding: 0 16px;
 
   .react-calendar {
     border-radius: 7px;

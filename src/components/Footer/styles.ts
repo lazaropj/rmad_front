@@ -9,6 +9,7 @@ export const Container = styled.footer`
 
   width: 100%;
   background: ${props => props.theme.colors.primary};
+  border-top: 1px solid #f4870a;
 
   position: fixed;
   z-index: 2;

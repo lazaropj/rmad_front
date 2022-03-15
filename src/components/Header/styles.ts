@@ -6,6 +6,10 @@ export const Container = styled.div`
 
   background: #fdbd27;
 
+  border-bottom: 2px solid #f4870a;
+  -webkit-box-shadow: 0px 10px 15px -2px rgb(0 0 0 / 32%);
+  box-shadow: 0px 10px 15px -2px rgb(0 0 0 / 32%);
+
   width: 100%;
   z-index: 2;
 `;
@@ -13,6 +17,7 @@ export const Container = styled.div`
 export const Menu = styled.div`
   background: #504e49;
   margin-top: 15px;
+  padding: 0 16px;
 
   a {
     color: ${props => props.theme.colors.white.base};
@@ -24,6 +29,10 @@ export const Menu = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (min-width: 768px) {
+      justify-content: end;
+    }
   }
 `;
 
