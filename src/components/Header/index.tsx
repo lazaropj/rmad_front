@@ -10,23 +10,23 @@ export const Header: React.FC = () => {
           <img alt="Logo" src={logo} />
         </Style.Logo>
         <Style.Menu>
-        <Nav>
-          <NavItem>
-            <NavLink href="/dashboard">
-              Dashboard
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/travels">
-              Travels
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink active href="/new-travel">
-              Novo  Trajeto
-            </NavLink>
-          </NavItem>
-        </Nav>
+          <Nav>
+            <NavItem>
+              <NavLink href="/dashboard">
+                Dashboard
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/travels">
+                Travels
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink active href="/new-travel">
+                Novo  Trajeto
+              </NavLink>
+            </NavItem>
+          </Nav>
         </Style.Menu>
 
     </Style.Container>

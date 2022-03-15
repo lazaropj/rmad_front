@@ -89,6 +89,10 @@ export const TableHeader = styled.div`
     color: ${(props) => props.theme.colors.primary};
     margin-bottom: 0;
     top: 36px;
+    
+    @media (min-width: 768px) {
+      font-size: 1.5rem;
+    }
   }
 
   div {
