@@ -40,12 +40,18 @@ export default createGlobalStyle<Props>`
   @font-face {
     font-family: 'Nunito';
     src: local('Nunito'), url(${NunitoFontLt}) format('truetype');
-    font-weight: normal;
+    font-weight: thin;
   }
 
   @font-face {
     font-family: 'Nunito';
     src: local('Nunito'), url(${NunitoFontRg}) format('truetype');
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: 'Nunito';
+    src: local('Nunito'), url(${NunitoFontBd}) format('truetype');
     font-weight: bold;
   }
 
@@ -53,7 +59,8 @@ export default createGlobalStyle<Props>`
     height: 100vh;
 
     overflow-x: hidden;
-    font-family:'Nunito', sans-serif;
+    font-family:'Nunito', sans-serif !important;
+    font-weight: normal !important;
   }
 
   body {

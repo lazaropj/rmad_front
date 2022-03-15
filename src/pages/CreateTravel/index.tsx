@@ -71,43 +71,49 @@ export const CreateTravel: React.FC = () => {
           )}
           >
           <FormProvider {...methods}>
-            <Style.InputsContainer>
-            <FormGroup>
-              <Label for="title">Título</Label>
-              <Input
-                className="form-control"
-                id="title"
-                name="title"
-                placeholder="O que você está planejando"
-                type="text"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="description">Descrição</Label>
-              <Input
-                className="form-control"
-                id="description"
-                name="description"
-                placeholder="Descreva qual o seu plano"
-                type="text"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="route">Rota</Label>
-              <Input
-                className="form-control"
-                id="route"
-                name="route"
-                placeholder="Qual será a rota?"
-                type="text"
-              />
-            </FormGroup>
-            </Style.InputsContainer>
             <Style.DatePickerContainer>
-              <Label>Quando</Label>
-              <DateTimePicker calendarClassName="react-datetime-custom" locale="pt-BR" secondAriaLabel="teste" amPmAriaLabel="pm" onChange={onChange} value={value} />
+              <Label>Primero, defina uma data e um horário para o trajeto</Label>
+              <DateTimePicker 
+                calendarClassName="react-datetime-custom"
+                locale="pt-BR" secondAriaLabel="teste" 
+                amPmAriaLabel="pm" 
+                onChange={onChange} 
+                value={value} />
             </Style.DatePickerContainer>
+            <Style.InputsContainer>
+              <FormGroup>
+                <Label for="title">Título</Label>
+                <Input
+                  className="form-control"
+                  id="title"
+                  name="title"
+                  placeholder="O que você está planejando"
+                  type="text"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="description">Descrição</Label>
+                <Input
+                  className="form-control"
+                  id="description"
+                  name="description"
+                  placeholder="Descreva qual o seu plano"
+                  type="text"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="route">Rota</Label>
+                <Input
+                  className="form-control"
+                  id="route"
+                  name="route"
+                  placeholder="Qual será a rota?"
+                  type="text"
+                />
+              </FormGroup>
+            </Style.InputsContainer>
             <Style.ButtonContainer>
+              <Button type="button" onClick={() => navigate('/')}>Cancelar</Button>
               <Button type="submit" onClick={() => console.log(value)}>Criar rota</Button>
             </Style.ButtonContainer>
           </FormProvider>

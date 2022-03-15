@@ -1,12 +1,10 @@
 import React from 'react';
-
 import * as Style from './styles';
 
-
-export const Home: React.FC = () => {
-  return (
+export const Footer: React.FC = () => {
+  return(
     <Style.Container>
-      <h1>Home</h1>
+      <span>RMAD ©</span>
     </Style.Container>
   );
 };

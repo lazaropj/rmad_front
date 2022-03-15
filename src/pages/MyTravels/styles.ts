@@ -6,6 +6,8 @@ export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+
+  padding: 0 30px;
 `;
 
 export const AlertContainer = styled.div``;

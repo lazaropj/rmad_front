@@ -5,7 +5,7 @@ import {
   Route,
   Outlet,
 } from 'react-router-dom';
-import { Header } from 'src/components';
+import { Footer, Header } from 'src/components';
 
 import * as Page from 'src/pages';
 import { PrivateRoute } from './route';
@@ -14,7 +14,7 @@ export const Routes: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" element={<Page.Dashboard />} />
+        <Route path="/" element={<Page.Home />} />
         <Route path="/login" element={<Page.SignInPage />} />
         <Route path="/register" element={<Page.Register />} />
         <Route
@@ -23,11 +23,12 @@ export const Routes: React.FC = () => {
               <>
                 <Header />
                 <Outlet />
+                <Footer />
               </>
             }
           >
-            <Route path="/" element={<Page.Dashboard />} />
             <Route path="/" element={<PrivateRoute />}>
+              <Route path="/dashboard" element={<Page.Dashboard />} />
               <Route path="travels" element={<Page.MyTravels />} />
               <Route path="new-travel" element={<Page.CreateTravel />} />
             </Route>
